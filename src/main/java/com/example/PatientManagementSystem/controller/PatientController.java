@@ -2,12 +2,13 @@ package com.example.PatientManagementSystem.controller;
 
 import com.example.PatientManagementSystem.entity.Patient;
 import com.example.PatientManagementSystem.service.PatientServiceImpl;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 public class PatientController {
@@ -31,13 +32,16 @@ public class PatientController {
     }
 
     @PostMapping("/addPatient")
-    public String addPatient(@ModelAttribute Patient patient){
+    public String addPatient(@ModelAttribute("patient") @Valid Patient patient, BindingResult bindingResult){
+        if(bindingResult.hasErrors()) {
+            return "addPatient";
+        }
         patientService.addPatient(patient);
         return "redirect:/";
     }
 
     @GetMapping("/deletePatient/{id}")
-    public String deleteEmployee(@PathVariable("id") int id){
+    public String deletePatient(@PathVariable("id") int id){
         if(patientService.deletePatient(id))
             return "redirect:/";
         System.out.println("Error in deleting patient");
@@ -45,15 +49,25 @@ public class PatientController {
     }
 
     @GetMapping("/updatePatientForm/{id}")
-    public String updateEmployeeForm(@PathVariable("id") int id,Model model){
+    public String updatePatientForm(@PathVariable("id") int id,Model model){
         Patient p = patientService.getPatientById(id);
         model.addAttribute("patient",p);
         return "updatePatient";
     }
 
     @PostMapping("/updatePatient")
-    public String updateEmployee(@ModelAttribute Patient p){
+    public String updatePatient(@ModelAttribute("patient") @Valid Patient p, BindingResult bindingResult){
+        if(bindingResult.hasErrors()) {
+            return "updatePatient";
+        }
         patientService.updatePatient(p);
         return "redirect:/";
+    }
+
+    @GetMapping("/searchPatientByName")
+    public String searchPatientByName(@RequestParam String patientName, Model model){
+        List<Patient> p = patientService.getPatientByName(patientName);
+        model.addAttribute("patientList",p);
+        return "index";
     }
 }

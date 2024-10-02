@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Add Patient Form</title>
+  <link th:href="@{/css/style.css}" rel="stylesheet">
 </head>
 <body>
 
@@ -14,14 +15,17 @@
       <tr>
         <td>ID: </td>
         <td><input type="text" th:field="*{id}"></td>
+        <td th:if="${#fields.hasErrors('id')}" th:errors="*{id}"></td>
       </tr>
       <tr>
         <td>Name: </td>
         <td><input type="text" th:field="*{name}"></td>
+        <td th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></td>
       </tr>
       <tr>
         <td>Age: </td>
         <td><input type="number" th:field="*{age}"></td>
+        <td th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></td>
       </tr>
       <tr>
         <td>Gender: </td>
@@ -32,18 +36,22 @@
             <option value="Other">Other</option>
           </select>
         </td>
+        <td th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}"></td>
       </tr>
       <tr>
         <td>Email: </td>
         <td><input type="email" th:field="*{email}"></td>
+        <td th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></td>
       </tr>
       <tr>
         <td>City: </td>
         <td><input type="text" th:field="*{city}"></td>
+        <td th:if="${#fields.hasErrors('city')}" th:errors="*{city}"></td>
       </tr>
       <tr>
         <td>Date of Birth: </td>
         <td><input type="date" th:field="*{dateOfBirth}"></td>
+        <td th:if="${#fields.hasErrors('dateOfBirth')}" th:errors="*{dateOfBirth}"></td>
       </tr>
       <tr>
         <td><input type="submit" value="Submit"></td>

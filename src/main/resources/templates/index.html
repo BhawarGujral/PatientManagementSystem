@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Patient Management System</title>
+  <link th:href="@{/css/style.css}" rel="stylesheet">
 </head>
 <body>
 
@@ -10,6 +11,13 @@
   <h1> Patient Management System </h1>
 
   <a th:href="@{/addPatientForm}">Add Patient</a> <br> <br>
+
+  <form action="#" th:action="@{/searchPatientByName}" method="get">
+
+    Search Employee: <input type="text" name="patientName">
+    <input type="submit" value="search">
+
+  </form> <br><br>
 
   <table border="1">
     <thead>

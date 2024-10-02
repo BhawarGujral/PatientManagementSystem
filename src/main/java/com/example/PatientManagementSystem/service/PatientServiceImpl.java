@@ -3,6 +3,7 @@ package com.example.PatientManagementSystem.service;
 import com.example.PatientManagementSystem.entity.Patient;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -45,5 +46,19 @@ public class PatientServiceImpl implements PatientService{
     @Override
     public boolean deletePatient(int id) {
         return patientMap.remove(id) != null;
+    }
+
+    @Override
+    public List<Patient> getPatientByName(String name) {
+        List<Patient> matchingPatients = new ArrayList<>();
+
+        for (Map.Entry<Integer, Patient> entry : patientMap.entrySet()) {
+            Patient patient = entry.getValue();
+            if (patient.getName().toLowerCase().startsWith(name.toLowerCase())) {
+                matchingPatients.add(patient);
+            }
+        }
+
+        return matchingPatients;
     }
 }

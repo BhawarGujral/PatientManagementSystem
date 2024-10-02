@@ -16,4 +16,6 @@ public interface PatientService {
 
     public boolean deletePatient(int id);
 
+    public List<Patient> getPatientByName(String name);
+
 }
