@@ -18,4 +18,6 @@ public interface PatientService {
 
     public List<Patient> getPatientByName(String name);
 
+    public List<Patient> getPatientInOrder();
+
 }

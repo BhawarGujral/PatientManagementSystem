@@ -64,9 +64,23 @@ public class PatientController {
         return "redirect:/";
     }
 
+    @GetMapping("/searchPatientByID")
+    public String searchPatientByID(@RequestParam int patientId, Model model){
+        Patient p = patientService.getPatientById(patientId);
+        model.addAttribute("patientList",p);
+        return "index";
+    }
+
     @GetMapping("/searchPatientByName")
     public String searchPatientByName(@RequestParam String patientName, Model model){
         List<Patient> p = patientService.getPatientByName(patientName);
+        model.addAttribute("patientList",p);
+        return "index";
+    }
+
+    @GetMapping("/getPatientInOrder")
+    public String getPatientInOrder(Model model){
+        List<Patient> p =  patientService.getPatientInOrder();
         model.addAttribute("patientList",p);
         return "index";
     }

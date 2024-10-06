@@ -12,10 +12,17 @@
 
   <a th:href="@{/addPatientForm}">Add Patient</a> <br> <br>
 
+  <form action="#" th:action="@{/searchPatientByID}" method="get">
+
+    Search Employee: <input type="text" name="patientId">
+    <input type="submit" value="search by id">
+
+  </form> <br><br>
+
   <form action="#" th:action="@{/searchPatientByName}" method="get">
 
     Search Employee: <input type="text" name="patientName">
-    <input type="submit" value="search">
+    <input type="submit" value="search by name">
 
   </form> <br><br>
 
@@ -45,6 +52,10 @@
     </tr>
     </tbody>
   </table>
+
+  <form action="#" th:action="@{/getPatientInOrder}" method="get">
+    <input type="submit" value="Patients above 18">
+  </form>
 </div>
 
 </body>
